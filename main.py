@@ -19,17 +19,17 @@ pattern = r"\b\d+\w+:\w+\(\d+:\d+\)\b"
 def replace_values(match):
     return pd.NA
 
-def download_btn(binary_image):
-    file_name = "CrystalData"
+def download_btn(binary_image, file_name="CrystalData"):
     if file_name:
         file_name = str(file_name) + ".png"
-        plt.savefig(file_name)
+        with open(file_name, "wb") as f:
+            f.write(binary_image.getbuffer())
         st.download_button(
-                    label="Download image",
-                    data=binary_image,
-                    file_name=file_name,
-                    mime="image/png"
-                )
+            label="Download image",
+            data=open(file_name, "rb").read(),
+            file_name=file_name,
+            mime="image/png"
+        )
 
 def read_file(uploaded_file):
     # Read CSV file as a text file
