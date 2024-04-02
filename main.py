@@ -68,11 +68,12 @@ if st.button("Plot Graph"):
             plot = plot_reactor(final_dataframe= block_data, clear_dataframe= clear, cloud_dataframe= cloud)
             st.pyplot(plot)
 
-            plot_binary = io.BytesIO()
-            plt.savefig(plot_binary, format='png')
-            plot_binary.seek(0)  # Move the stream pointer to the beginning
-            # Close the plot to release resources
+            # plot_binary = io.BytesIO()
+            # plt.savefig(plot_binary, format='png')
+            # plot_binary.seek(0)  # Move the stream pointer to the beginning
+            # # Close the plot to release resources
             
-            plt.close(plot)
-            download_btn(binary_image= plot_binary)
+            # plt.close(plot)
+            plt.savefig("plot.png")  # Save the plot as a file
+            download_btn(binary_image=open("plot.png", "rb").read())
     
