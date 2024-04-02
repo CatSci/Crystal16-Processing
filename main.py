@@ -6,6 +6,8 @@ import re
 import matplotlib
 matplotlib.use('Agg')
 
+st.header("Crystal Data Processing")
+
 uploaded_file = st.file_uploader("Choose a file")
 
 
@@ -16,32 +18,7 @@ pattern = r"\b\d+\w+:\w+\(\d+:\d+\)\b"
 def replace_values(match):
     return pd.NA
 
-# def read_file(uploaded_file):
-#     # Read CSV file as a text file
-#     lines = uploaded_file.getvalue().decode('utf-8').splitlines()
 
-#     # Extract header (first line) and data
-#     header = lines[0].strip().split(',')
-#     data_lines = lines[1:]
-
-#     # Process the data lines as needed
-#     data = [line.strip().split(',') for line in data_lines]
-
-#     # # If the number of columns in data doesn't match the number of columns in header, add temporary column names
-#     # num_cols_header = len(header)
-#     # for i, row in enumerate(data):
-#     #     num_cols_row = len(row)
-#     #     if num_cols_row != num_cols_header:
-#     #         temp_header = [f"temp{i+1}" for i in range(num_cols_row)]
-#     #         # If header already exists, skip appending temporary column names
-#     #         if header == ['']:
-#     #             header = temp_header
-#     #         break
-
-#     # Create DataFrame with header and data
-#     df = pd.DataFrame(data, columns=header)
-
-    # return df
 
 def read_file(uploaded_file):
     # Read CSV file as a text file
