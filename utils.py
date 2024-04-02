@@ -4,7 +4,7 @@ import detecta
 import streamlit as st
 import seaborn as sns
 import matplotlib.pyplot as plt
-
+import io
 
 def get_columns(dataframe):
   """
@@ -209,5 +209,8 @@ def plot_reactor(final_dataframe, clear_dataframe, cloud_dataframe):
     ax.set_xticks(final_dataframe['Decimal Time [mins]'][ticks_positions])
     # Add legend
     ax.legend(loc='upper center', bbox_to_anchor=(0.5, 1.10), shadow=True, ncol=2)
-    
-    return fig
+    st.pyplot(plt.gcf())  # Pass the current figure (gcf)
+    plot_binary = io.BytesIO()
+    plt.savefig(plot_binary, format='png')
+    plot_binary.seek(0)
+    return plot_binary

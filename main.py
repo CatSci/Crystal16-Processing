@@ -19,17 +19,17 @@ pattern = r"\b\d+\w+:\w+\(\d+:\d+\)\b"
 def replace_values(match):
     return pd.NA
 
-def download_btn(binary_image, file_name="CrystalData"):
+def download_btn(binary_image):
+    file_name = "CrystalData"
     if file_name:
         file_name = str(file_name) + ".png"
-        with open(file_name, "wb") as f:
-            f.write(binary_image.getbuffer())
+        plt.savefig(file_name)
         st.download_button(
-            label="Download image",
-            data=open(file_name, "rb").read(),
-            file_name=file_name,
-            mime="image/png"
-        )
+                    label="Download image",
+                    data=binary_image,
+                    file_name=file_name,
+                    mime="image/png"
+                )
 
 def read_file(uploaded_file):
     # Read CSV file as a text file
@@ -66,14 +66,11 @@ if st.button("Plot Graph"):
             
         
             plot = plot_reactor(final_dataframe= block_data, clear_dataframe= clear, cloud_dataframe= cloud)
-            st.pyplot(plot)
+            # st.pyplot(plot)
 
-            # plot_binary = io.BytesIO()
-            # plt.savefig(plot_binary, format='png')
-            # plot_binary.seek(0)  # Move the stream pointer to the beginning
-            # # Close the plot to release resources
+              # Move the stream pointer to the beginning
+            # Close the plot to release resources
             
-            # plt.close(plot)
-            plt.savefig("plot.png")  # Save the plot as a file
-            download_btn(binary_image=open("plot.png", "rb").read())
+
+            download_btn(binary_image= plot)
     
