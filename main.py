@@ -3,6 +3,7 @@ import pandas as pd
 from utils import get_block_data, get_clear_and_cloud, convert_datatype, get_experiments_details, get_reactor_info, plot_reactor
 import matplotlib.pyplot as plt
 import re
+import io 
 import matplotlib
 matplotlib.use('Agg')
 
@@ -18,7 +19,17 @@ pattern = r"\b\d+\w+:\w+\(\d+:\d+\)\b"
 def replace_values(match):
     return pd.NA
 
-
+def download_btn(binary_image):
+    file_name = "CrystalData"
+    if file_name:
+        file_name = str(file_name) + ".png"
+        plt.savefig(file_name)
+        st.download_button(
+                    label="Download image",
+                    data=binary_image,
+                    file_name=file_name,
+                    mime="image/png"
+                )
 
 def read_file(uploaded_file):
     # Read CSV file as a text file
@@ -56,4 +67,12 @@ if st.button("Plot Graph"):
         
             plot = plot_reactor(final_dataframe= block_data, clear_dataframe= clear, cloud_dataframe= cloud)
             st.pyplot(plot)
+
+            plot_binary = io.BytesIO()
+            plt.savefig(plot_binary, format='png')
+            plot_binary.seek(0)  # Move the stream pointer to the beginning
+            # Close the plot to release resources
+            
+            plt.close(plot)
+            download_btn(binary_image= plot_binary)
     

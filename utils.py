@@ -172,7 +172,7 @@ def plot_reactor(final_dataframe, clear_dataframe, cloud_dataframe):
    # Define colors and markers for clear and cloud data
     marker = 'o'
     # Create a new figure
-    fig, ax = plt.subplots()
+    fig, ax = plt.subplots(figsize=(10, 8))
     # Plot temperature and transmission for each reactor
     for reactor_col in final_dataframe.columns:
         if 'Temperature' in reactor_col:
@@ -208,6 +208,6 @@ def plot_reactor(final_dataframe, clear_dataframe, cloud_dataframe):
     ticks_positions = np.linspace(0, num_data_points - 1, num_ticks, dtype=int)
     ax.set_xticks(final_dataframe['Decimal Time [mins]'][ticks_positions])
     # Add legend
-    ax.legend(loc='upper center', bbox_to_anchor=(0.5, -0.15), shadow=True, ncol=2)
+    ax.legend(loc='upper center', bbox_to_anchor=(0.5, 1.10), shadow=True, ncol=2)
     
     return fig
