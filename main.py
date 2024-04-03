@@ -31,7 +31,7 @@ def download_btn(binary_image):
                     mime="image/png"
                 )
 
-@st.cache
+@st.cache_data
 def read_file(uploaded_file):
     # Read CSV file as a text file
     lines = uploaded_file.getvalue().decode('utf-8').splitlines()
