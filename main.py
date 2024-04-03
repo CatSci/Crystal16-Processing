@@ -74,4 +74,4 @@ if st.button("Plot Graph"):
             
 
             download_btn(binary_image= plot)
-    
+            st.cache_data.clear()
