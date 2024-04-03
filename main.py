@@ -1,6 +1,11 @@
 import streamlit as st
 import pandas as pd
-from utils import get_block_data, get_clear_and_cloud, convert_datatype, get_experiments_details, get_reactor_info, plot_reactor
+from utils import (get_block_data, 
+                   get_clear_and_cloud, 
+                    convert_datatype, 
+                    get_experiments_details, 
+                    get_reactor_info,
+                    plot_reactor)
 import matplotlib.pyplot as plt
 import re
 import io 
@@ -31,7 +36,7 @@ def download_btn(binary_image):
                     mime="image/png"
                 )
 
-@st.cache_data
+
 def read_file(uploaded_file):
     # Read CSV file as a text file
     lines = uploaded_file.getvalue().decode('utf-8').splitlines()
@@ -62,16 +67,8 @@ if st.button("Plot Graph"):
 
             reactor_dataframe = get_experiments_details(dataframe= df)
             reactor_info = get_reactor_info(extracted_dataframe= reactor_dataframe)
-            # st.write(reactor_info)
-            
-            
-        
-            plot = plot_reactor(final_dataframe= block_data, clear_dataframe= clear, cloud_dataframe= cloud)
-            # st.pyplot(plot)
 
-              # Move the stream pointer to the beginning
-            # Close the plot to release resources
-            
+            plot = plot_reactor(final_dataframe= block_data, clear_dataframe= clear, cloud_dataframe= cloud)
 
             download_btn(binary_image= plot)
-            st.cache_data.clear()
+
